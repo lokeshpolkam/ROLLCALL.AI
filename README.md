@@ -1,91 +1,109 @@
-ROLLCALL.AI – Smart Attendance System (MTCNN + ArcFace + OpenCV)
+# ROLLCALL.AI
 
-ROLLCALL.AI is a real-time, contactless smart attendance system that uses MTCNN for face detection, ArcFace for high-accuracy face recognition, and OpenCV for live image processing. The system captures datasets, trains models, and performs recognition—fully automated and optimized for classroom and organizational attendance management.
+ROLLCALL.AI is a smart, real-time attendance system built using **MTCNN / Haar Cascade** for face detection, **ArcFace** for high-accuracy facial recognition, and **OpenCV** for live video processing. It captures datasets, trains models, and performs recognition with a complete UI-based workflow.
 
-🚀 Features
+---
 
-Real-time facial detection using MTCNN / Haar Cascade
+## 🚀 Features
+- Student credential entry system
+- Automated dataset image capture with variations
+- Training UI (Haar Cascade + ArcFace) with auto-stop
+- Real-time recognition UI with name + confidence
+- Attendance logging (CSV / SQLite)
+- High-accuracy embeddings (ArcFace 512D)
+- Fast detection + clean GUI for each step
 
-High-precision recognition using ArcFace embeddings
+---
 
-Automatic dataset creation with pose and expression variations
+# 📸 UI Screens With Explanations
 
-Student credential input system for dataset organization
+Below are all the UI screens included in the project.
 
-Training UI with auto-stop epoch logic
+---
 
-Recognition UI displaying predicted name & confidence
+## **1. Student Credentials Input UI**
+This screen appears before dataset capture.  
+You enter the student's **Name, Roll Number, and Course/Details**, and the system automatically creates a labeled folder for storing images.
 
-Attendance logging and automatic identification
+![Student Credentials Input UI](https://github.com/lokeshpolkam/ROLLCALL.AI/blob/main/ui%20images/capture%20u1.png?raw=true)
 
-Clean and scalable code structure
+---
 
-📸 User Interface Screens
-1. Student Credentials Input UI
+## **2. Dataset Image Capture UI**
+This UI automatically captures **100–200 images** with variations like tilt, angles, lighting changes, and expressions.  
+It uses real-time face detection and shows capture progress.
 
-File: capture u1.png
-This interface is used before dataset recording. Users enter student details such as Name, Roll Number, and other credentials. The application uses this information to organize and label dataset images correctly.
+![Dataset Image Capture UI](https://github.com/lokeshpolkam/ROLLCALL.AI/blob/main/ui%20images/capture%20u2.png?raw=true)
 
-2. Dataset Image Capture UI
+---
 
-File: capture u2.png
-This screen captures multiple images of the student with real-time face detection. The system automatically collects images with variations (angle, tilt, expression) for robust training. No manual clicking is needed—everything is automated.
+## **3. Training UI (Haar Cascade + ArcFace)**
+This is the model training dashboard.  
+It shows epoch progress, logs, dataset size, and includes **AUTO-STOP** feature when training stabilizes.
 
-3. Training Interface (Haar Cascade + ArcFace)
+![Training UI](https://github.com/lokeshpolkam/ROLLCALL.AI/blob/main/ui%20images/trainer%20ui.png?raw=true)
 
-File: trainer ui.png
-This UI trains the recognition model. Haar Cascade is used for face detection during training, while ArcFace embeddings ensure high-accuracy classification. Training progress, loss values, and auto-stop epoch logic are visibly displayed.
+---
 
-4. Real-Time Recognition UI
+## **4. Real-Time Recognition UI**
+This UI performs live recognition using ArcFace embeddings + Haar Cascade.  
+Shows bounding boxes, predicted name, confidence score, and logs attendance instantly.
 
-File: recog ui.png
-This is the recognition interface. It uses ArcFace embeddings + Haar Cascade detection to identify faces in real time. The UI shows the camera stream, bounding boxes, predicted name, confidence score, and logs attendance instantly.
+![Recognition UI](https://github.com/lokeshpolkam/ROLLCALL.AI/blob/main/ui%20images/recog%20ui.png?raw=true)
 
-📂 Project Structure
+---
+
+# 📂 Project Structure
+
 ROLLCALL.AI/
-│
 ├── src/
-│   ├── capture.py        # Dataset capture module with UI
-│   ├── trainer.py        # Training interface (Haar + ArcFace)
-│   ├── recog.py          # Real-time recognition interface
-│   ├── utils/            # Helper functions
-│
-├── ui images/            # All UI screenshots
-├── models/               # ArcFace / Haar Cascade models
-├── data/                 # Stored datasets and embeddings
+│ ├── capture.py
+│ ├── trainer.py
+│ ├── recog.py
+│ ├── utils.py
+│ └── db.py
+├── ui images/
+├── models/
+├── data/
+│ ├── enrolled/
+│ └── embeddings.pkl
 ├── requirements.txt
 └── README.md
 
-🛠️ How It Works
-1. Detection (MTCNN / Haar Cascade)
 
-Detects faces and extracts key points for alignment.
+---
 
-2. Embedding Generation (ArcFace)
+# ⚙️ How the System Works
 
-Creates a 512-D facial embedding using a deep neural model.
+### **1. Enrollment**
+User enters student details → system opens camera → captures image dataset automatically.
 
-3. Matching
+### **2. Training**
+Faces are aligned → ArcFace generates embeddings → embeddings stored → classifier/lookup database created.
 
-Uses cosine similarity to match embeddings with the stored database.
+### **3. Recognition**
+Real-time face detection → embedding extraction → similarity matching → attendance logged.
 
-4. Attendance Logging
+### **4. Logging**
+Each recognized student is logged with:
+- Name  
+- Roll  
+- Timestamp  
+- Confidence score  
 
-Recognized students are instantly recorded in the attendance logs.
+---
 
-📥 Installation
-git clone https://github.com/lokeshpolkam/ROLLCALL.AI
-cd ROLLCALL.AI
+# 🖥️ Quick Start
+
+### **Install Requirements**
 pip install -r requirements.txt
-
-▶️ Usage
-1. Capture Dataset
+Capture Dataset
 python src/capture.py
 
-2. Train Model
+Train Model
 python src/trainer.py
 
-3. Start Recognition
+Start Recognition
 python src/recog.py
 
 📘 Technologies Used
@@ -94,14 +112,19 @@ Python
 
 OpenCV
 
-MTCNN
+MTCNN / Haar Cascade
 
 ArcFace (InsightFace)
 
-NumPy / SciPy
+Tkinter GUI
 
-Tkinter (for UI)
+NumPy / Pandas
 
-📄 Purpose
+📄 License
 
-ROLLCALL.AI aims to replace manual or biometric attendance with an AI-powered solution that is faster, contactless, more accurate, and easy to deploy.
+MIT License
+
+🙌 Credits
+
+Developed by Lokesh Polkam
+ROLLCALL.AI – 2025
